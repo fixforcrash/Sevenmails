@@ -11,7 +11,7 @@ import argparse
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
-PLAYBOOK_REQUIRED = ['type', 'status', 'tags', 'maintained_by', 'agent', 'department']
+PLAYBOOK_REQUIRED = ['type', 'status', 'tags', 'maintained_by']
 SOUL_REQUIRED = ['type', 'status', 'tags', 'maintained_by', 'agent_id', 'role', 'department']
 
 def validate_frontmatter(filepath: Path, required_fields: List[str]) -> List[str]:
