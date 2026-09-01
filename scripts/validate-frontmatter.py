@@ -42,6 +42,9 @@ def validate_frontmatter(filepath: Path, required_fields: List[str]) -> List[str
         for field in required_fields:
             if field not in fm:
                 errors.append(f"Missing required field: {field}")
+            elif isinstance(fm[field], str) and fm[field].startswith('<') and fm[field].endswith('>'):
+                # Placeholder value in template - skip validation error
+                pass
         
         # Type checks
         if 'tags' in fm and not isinstance(fm['tags'], list):

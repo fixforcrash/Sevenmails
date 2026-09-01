@@ -3,6 +3,9 @@ type: SOUL.md Template
 status: active
 tags: [SOUL, Template, Technical]
 maintained_by: Orchestrator AI (Manager)
+agent_id: "<agent-id>"
+role: "<Role Title>"
+department: "Technical"
 ---
 
 # SOUL.md Template — Technical Agent

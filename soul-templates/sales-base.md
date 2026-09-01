@@ -3,6 +3,9 @@ type: SOUL.md Template
 status: active
 tags: [SOUL, Template, Sales]
 maintained_by: Orchestrator AI (Manager)
+agent_id: "<agent-id>"
+role: "<Role Title>"
+department: "Sales"
 ---
 
 # SOUL.md Template — Sales Agent
