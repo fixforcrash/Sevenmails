@@ -1,0 +1,39 @@
+name: Sync GitHub to Vault
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'playbooks/**'
+      - 'soul-templates/**'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: pip install pyyaml frontmatter
+      
+      - name: Validate changed files
+        run: |
+          python scripts/validate-frontmatter.py --dir playbooks --dir soul-templates
+          python scripts/validate-playbook-structure.py --dir playbooks
+      
+      - name: Run GitHub → Vault sync
+        run: python scripts/github-to-vault.py
+      
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Sync to Obsidian Vault failed"
+          # Add webhook notification here

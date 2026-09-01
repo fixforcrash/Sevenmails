@@ -1,0 +1,77 @@
+# Sample Agent Profile Configuration
+# Copy to agent-profiles/<agent-id>/config.yaml and customize
+
+agent:
+  id: "<agent-id>"
+  name: "<Display Name>"
+  role: "<Role Title>"
+  department: "<Technical|Sales|Marketing|Operations>"
+  
+model:
+  provider: "nvidia"
+  name: "nemotron-3-ultra-550b-a55b"
+  temperature: 0.3
+  max_tokens: 8192
+
+tools:
+  enabled:
+    - "terminal"
+    - "web_search"
+    - "web_extract"
+    - "search_files"
+    - "read_file"
+    - "write_file"
+    - "patch"
+    - "mnemosyne_remember"
+    - "mnemosyne_recall"
+    - "mnemosyne_remember_canonical"
+    - "mnemosyne_recall_canonical"
+    - "skill_view"
+    - "skills_list"
+    - "delegate_task"
+    - "cronjob"
+    - "process"
+    - "vision_analyze"
+
+skills:
+  auto_load: true
+  preferred_categories:
+    - "<department-lowercase>"
+    - "general"
+
+memory:
+  mnemosyne:
+    namespace: "<agent-id>"
+    auto_persist: true
+    scratchpad_enabled: true
+  
+  obsidian_vault:
+    path: "C:/Users/black/Documents/Obsidian Vault"
+    playbook_path: "02 - ORGANIZATION/Agents/Playbooks/<DEPT>/"
+    chat_memory_path: "02 - ORGANIZATION/Manager Chat Memory/"
+
+persistence:
+  three_layer:
+    layer1_mnemosyne: true
+    layer2_vault: true
+    layer3_soul: true  # Requires CEO consent via Orchestrator
+
+verification:
+  verify_after_write: true
+  independent_verification: true
+  route_back_on_failure: true
+
+communication:
+  style: "professional|grounded|precise"
+  no_hype: true
+  no_overstatement: true
+
+escalation:
+  manager: "orchestrator-ai"
+  ceo: "user"
+
+browsing:
+  primary: "camofox"
+  fallback: ["crw", "jina"]
+  max_parallel: 3
+  cooldown_seconds: 90

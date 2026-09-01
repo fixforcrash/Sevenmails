@@ -1,0 +1,51 @@
+# Agent Org Config - Git Ignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+*.env
+
+# Logs
+*.log
+logs/
+
+# Mnemosyne (agent-owned, not in repo)
+mnemosyne/
+*.db
+
+# Obsidian Vault (source of truth, synced separately)
+*Obsidian Vault*
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# n8n workflows (exported separately)
+n8n-workflows/
+
+# IDE/Editor configs
+*.suo
+*.user
+*.userosscache
+*.sln.docstates

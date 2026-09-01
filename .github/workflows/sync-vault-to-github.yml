@@ -1,0 +1,35 @@
+name: Sync Vault to GitHub
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run only (no commit)'
+        type: boolean
+        default: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: pip install pyyaml frontmatter
+      
+      - name: Run Vault → GitHub sync
+        run: python scripts/vault-to-github.py --dry-run ${{ github.event.inputs.dry_run }}
+      
+      - name: Commit changes
+        if: ${{ !github.event.inputs.dry_run && steps.sync.outputs.changes == 'true' }}
+        run: |
+          git config user.name "agent-bot"
+          git config user.email "agent-bot@agent-org.local"
+          git add playbooks/ soul-templates/
+          git commit -m "chore: sync playbooks from Obsidian Vault [skip ci]"
+          git push

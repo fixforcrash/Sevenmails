@@ -1,0 +1,63 @@
+# Sample MCP Servers Configuration
+# Copy to agent-profiles/<agent-id>/mcp_servers.yaml and customize
+
+mcp_servers:
+  # Composio for app integrations (Gmail, LinkedIn, CRM, etc.)
+  composio:
+    command: "npx"
+    args: ["-y", "@composio/mcp-server"]
+    env:
+      COMPOSIO_API_KEY: "${COMPOSIO_API_KEY}"
+    enabled: true
+    toolsets:
+      - "gmail"
+      - "google-calendar"
+      - "linkedin"
+      - "hubspot"
+      - "salesforce"
+      - "pipedrive"
+      - "slack"
+      - "notion"
+      - "asana"
+      - "linear"
+      - "github"
+      - "google-drive"
+      - "google-sheets"
+      - "google-docs"
+
+  # Camofox for stealth browsing
+  camofox:
+    command: "npx"
+    args: ["-y", "@camofox/mcp-server"]
+    env:
+      CAMOUFOX_HEADLESS: "true"
+    enabled: true
+
+  # CRW (Crawl/Research/Write) for deep web research
+  crw:
+    command: "npx"
+    args: ["-y", "@crw/mcp-server"]
+    env:
+      CRW_API_KEY: "${CRW_API_KEY}"
+    enabled: true
+
+  # Jina AI for content extraction
+  jina:
+    command: "npx"
+    args: ["-y", "@jina-ai/mcp-server"]
+    env:
+      JINA_API_KEY: "${JINA_API_KEY}"
+    enabled: true
+
+  # GitHub via gh CLI (native, no MCP needed)
+  # Uses gh CLI directly via terminal tool
+
+  # Mnemosyne (native Hermes tool, no MCP needed)
+  # Uses mnemosyne_* tools directly
+
+# Agent-specific overrides
+# Add/remove servers based on agent role
+# Technical: crw, jina, composio (github, gcp, aws)
+# Sales: composio (gmail, linkedin, hubspot, salesforce), camofox
+# Marketing: composio (twitter, linkedin, meta, ga, gsc), crw
+# Operations: composio (asana, notion, gws, slack, linear)
